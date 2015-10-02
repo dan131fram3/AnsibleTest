@@ -1,5 +1,0 @@
----
-
-- name: Install chrome raw cli command
-  sudo: Yes
-  command: apt-get install chromium-browser
