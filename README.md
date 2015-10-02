@@ -11,8 +11,10 @@ As I was using standard ubuntu, mine was 'trusty' as you can see below
 
 apt_repository: repo='deb http://download.virtualbox.org/virtualbox/debian trusty contrib' state=present
 
-3) Change directory to where you cloned it and hop into the new directory e.g. cd ~/ansible-test/
-4) Run the command 'ansible-playbook -i inventory roles.yml -u root'
+3) Change the 'inventory' contents to your chosen machines ip addresses
+
+4) Change directory to where you cloned it and hop into the new directory e.g. cd ~/ansible-test/
+5) Run the command 'ansible-playbook -i inventory roles.yml -u root'
 
 This should run through the installation of firstly GIT and then secondly, Virtual box.
 

@@ -13,16 +13,9 @@
     url: "https://www.virtualbox.org/download/oracle_vbox.asc" 
     state: present
 
-#- name: Add key to local
-#  command: apt_key add oracle_vbox.asc
-
 - name: Update repos
   sudo: Yes
   command: apt-get update
-
-#- name: Install Virtual box
-#  sudo: Yes
-#  command: apt-get install virtualbox-5.0 
 
 - name : Install VBOX
   sudo: Yes
