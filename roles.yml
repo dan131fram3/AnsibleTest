@@ -1,0 +1,8 @@
+---
+
+- hosts: servers
+  sudo: True
+  roles:
+    - git
+#    - chrome
+    - virtualbox

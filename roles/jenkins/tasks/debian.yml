@@ -1,0 +1,28 @@
+---
+# Debian-specific tasks
+- name: Add the jenkins apt key
+  apt_key: url=https://jenkins-ci.org/debian/jenkins-ci.org.key state=present
+
+- name: Add jenkins apt repository
+  apt_repository: repo='deb http://pkg.jenkins-ci.org/debian binary/' state=present
+
+- name: Install git
+  apt: name=git-core state=present
+
+- name: Install Jenkins
+  apt: name=jenkins state=present
+
+- name: Install nginx config
+  template: src=jenkins_nginx.conf dest=/etc/nginx/sites-enabled/jenkins_nginx.conf
+  notify: restart nginx
+
+- name: Remove Default Nginx Config
+  file: path=/etc/nginx/sites-enabled/default state=absent
+  notify: restart nginx
+
+- name: Fix crumb name for nginx
+  lineinfile:
+    dest: /etc/default/jenkins
+    regexp: '^JAVA_ARGS'
+    line: 'JAVA_ARGS="-Djava.awt.headless=true -Dhudson.security.csrf.requestfield=Jenkins-crumb"'
+    state: present

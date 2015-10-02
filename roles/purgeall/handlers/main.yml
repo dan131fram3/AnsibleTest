@@ -1,0 +1,6 @@
+---
+#- name: purge all
+#  service: name=kodi enabled=yes state=restarted
+
+#- name: start kodi
+#  command: service kodi restart

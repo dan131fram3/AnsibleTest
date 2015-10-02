@@ -1,0 +1,5 @@
+# {{ ansible_managed }}
+#
+# send all syslog traffic to localhost:42185 too - i.e. fluentd
+
+*.* @127.0.0.1:42185

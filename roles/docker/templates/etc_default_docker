@@ -1,0 +1,6 @@
+# {{ ansible_managed }}
+
+# Docker Upstart and SysVinit configuration file
+
+# Force to use devicemapper to get around AUFS CAP issues
+DOCKER_OPTS="-s devicemapper"

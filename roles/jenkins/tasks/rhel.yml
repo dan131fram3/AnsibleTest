@@ -1,0 +1,26 @@
+---
+# RHEL Specific Tasks
+- name: Add jenkins repo
+  get_url: dest=/etc/yum.repos.d/jenkins.repo url=http://pkg.jenkins-ci.org/redhat/jenkins.repo owner=root group=root mode=0644
+
+- name: Add jenkins repo key
+  command: rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
+
+- name: Install jenkins
+  yum: name=jenkins state=present
+  notify: Restart Jenkins
+
+- name: Install nginx config
+  template: src=jenkins_nginx.conf dest=/etc/nginx/conf.d/jenkins_nginx.conf
+  notify: restart nginx
+
+- name: Remove Default Nginx Config
+  file: path=/etc/nginx/conf.d/default state=absent
+  notify: restart nginx
+
+- name: Fix crumb name for nginx
+  lineinfile:
+    dest: /etc/sysconfig/jenkins
+    regexp: '^JENKINS_JAVA_OPTIONS'
+    line: 'JENKINS_JAVA_OPTIONS="-Djava.awt.headless=true -Dhudson.security.csrf.requestfield=Jenkins-crumb"'
+    state: present

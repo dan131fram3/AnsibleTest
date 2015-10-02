@@ -1,0 +1,42 @@
+---
+driver:
+  name: docker
+  binary: /usr/bin/docker
+  use_sudo: false
+
+provisioner:
+  name: ansible_playbook
+  hosts: localhost
+  ansible_verbose: true
+  extra_vars:
+    dataloop_enabled: false
+  roles_path: /var/lib/jenkins/jobs/Test_Ansible_Roles/workspace/roles
+  # Chef isn't required any more. Just install Ruby
+  # to enable us to install and run Busser
+  require_ruby_for_busser: true
+
+platforms:
+  - name: ubuntu-14.04
+    driver_config:
+      image: ubuntu:14.04
+      platform: ubuntu
+      provision: true
+  - name: centos-7.1
+    driver_config:
+      image: centos:7
+      platform: centos
+      provision: true
+    # Don't use this as it installs EPEL6 on CentOS7
+      require_ansible_repo: false
+      install_epel_repo: true
+      provision_command:
+        - yum install -y epel-release
+        - yum install -y ansible ruby
+        - gem install rake
+
+suites:
+  - name: default
+
+verifier:
+  ruby_bindir: '/usr/bin'
+  sudo_command: sudo

@@ -1,0 +1,17 @@
+---
+# Debian-specific tasks
+
+- name: Purge multiple items
+  sudo: Yes
+  apt: name={{item}} state=absent
+  with_items:
+   - leafpad
+   - java
+
+- name: Uninstall kodi
+  sudo: Yes
+  command: apt-get remove kodi
+  command: apt-get purge kodi
+#  command: rm ~/.kodi/
+
+

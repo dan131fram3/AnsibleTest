@@ -1,0 +1,25 @@
+---
+
+- name: Make sure dkms package is up to date
+  sudo: Yes
+  command: apt-get install dkms
+
+- name: Add virtualbox repo for trusty
+  sudo: Yes
+  apt_repository: repo='deb http://download.virtualbox.org/virtualbox/debian trusty contrib' state=present
+
+- name: Add repo key
+  apt_key:
+    url: "https://www.virtualbox.org/download/oracle_vbox.asc" 
+    state: present
+
+#- name: Add key to local
+#  command: apt_key add oracle_vbox.asc
+
+- name: Update repos
+  sudo: Yes
+  command: apt-get update
+
+- name: Install Virtual box
+  sudo: Yes
+  command: apt-get install virtualbox-5.0

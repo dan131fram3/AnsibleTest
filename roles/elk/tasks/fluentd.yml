@@ -1,0 +1,31 @@
+---
+- name: Ensure TreasureData Yumrepo is present
+  template: src=fluentd.repo.j2 dest=/etc/yum.repos.d/fluentd.repo
+            owner=root group=root mode=0644
+
+- name: Ensure packages are installed
+  yum: name={{ item }} enablerepo=fluentd
+  with_items: elk_fluentd_pkgs
+
+- name: Check for elasticsearch plugin
+  command: /usr/lib64/fluent/ruby/bin/fluent-gem list
+  register: check
+
+- name: Ensure elasticsearch plugin is installed
+  command: /usr/lib64/fluent/ruby/bin/fluent-gem install fluent-plugin-elasticsearch
+  when: "'fluent-plugin-elasticsearch' not in check.stdout"
+
+- name: Ensure td-agent configuration is in place
+  template: src=td-agent.conf.j2 dest=/etc/td-agent/td-agent.conf
+            owner=root group=root mode=0644
+  notify:
+    - restart td-agent
+
+- name: Ensure local syslog sends to fluentd
+  template: src=rsyslogd_fluentd.conf.j2 dest=/etc/rsyslog.d/fluentd.conf
+            owner=root group=root mode=0644
+  notify:
+    - restart rsyslog
+
+- name: Ensure td-agent service is running
+  service: name=td-agent state=running enabled=true
