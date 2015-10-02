@@ -2,7 +2,7 @@
 #  sudo: Yes
 #  apt_key: url=https://www.virtualbox.org/download/oracle_vbox.asc
 
-- name: FUckit
+- name: phuckit
   sudo:  Yes
 #  command: apt-key add oracle_vbox.asc
 

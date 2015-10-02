@@ -2,7 +2,7 @@
 
 - name: Make sure dkms package is up to date
   sudo: Yes
-  command: apt-get install dkms
+  apt: name=dkms state=present
 
 - name: Add virtualbox repo for trusty
   sudo: Yes
@@ -20,6 +20,10 @@
   sudo: Yes
   command: apt-get update
 
-- name: Install Virtual box
+#- name: Install Virtual box
+#  sudo: Yes
+#  command: apt-get install virtualbox-5.0 
+
+- name : Install VBOX
   sudo: Yes
-  command: apt-get install virtualbox-5.0
+  apt: name=virtualbox-5.0 state=present

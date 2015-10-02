@@ -4,5 +4,8 @@
   sudo: True
   roles:
     - git
-#    - chrome
+
+- hosts: hosts
+  sudo: True
+  roles:
     - virtualbox
