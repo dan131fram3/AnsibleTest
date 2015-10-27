@@ -1,11 +1,10 @@
 ---
 
-- hosts: servers
+- hosts: all
   sudo: True
   roles:
-    - git
-
-- hosts: hosts
-  sudo: True
-  roles:
-    - virtualbox
+#    - virtualbox
+#    - script
+#    - slack
+#    - java
+    - test

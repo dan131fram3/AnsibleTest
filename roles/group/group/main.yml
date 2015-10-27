@@ -1,0 +1,37 @@
+---
+
+#This requires the group to be already created
+
+- group: name=engineers state=present
+- name: add several users
+  user: name={{ item }} state=present groups=engineers
+  with_items:
+     - dan
+     - ant
+     - jon
+     - nath
+     - mark
+     - jeff
+     - matt
+
+
+#- group: name=admins state=present
+
+#- name: add admins
+#  user: name={{ item }} state=present groups=admins
+#  with_items:
+#    - Steve
+#    - James
+#    - Endaff
+
+#  with_items:
+#     - testuser1
+#     - testuser2
+
+#Steve state=present group=admin
+
+#- name: Add some users from nested
+#  user: name={{ item[0] }}
+#    with_items:
+#      - [ 'alice', 'bob' ]
+ 
