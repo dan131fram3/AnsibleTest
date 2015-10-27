@@ -1,0 +1,10 @@
+- name: Install XBMC repo
+  sudo: Yes
+  apt_repository: repo=ppa:team-xbmc/ppa
+
+- name: Install update
+  sudo: Yes
+  command: apt-get update
+
+- name: Install KODI
+  apt: name=kodi state=present

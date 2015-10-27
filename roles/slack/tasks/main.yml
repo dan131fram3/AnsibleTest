@@ -5,10 +5,9 @@
     module: slack
     domain: devopsguys.slack.com
     token: aQxmP07MU0dgJ3FPnPxWCmjl
-    msg: "Test ran by {{ inventory_hostname }} @dan131fram3 "
+    msg: "Test on {{ inventory_hostname }} successful. @dan131fram3 ran this on  #hackweek-2 "
     username: Dansible
     icon_url: "http://www.pxleyes.com/images/tutorials/submissionsteps/fullsize/1487_step22_4ae415fe104fa.jpg"
     channel: "#testingchannel"
     link_names: 1
     parse: 'full'
-  
